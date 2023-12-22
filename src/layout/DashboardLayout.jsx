@@ -56,7 +56,7 @@ const DashboardLayout = () => {
 									<button
 										type='button'
 										onClick={openModal}
-										className='w-full flex items-center justify-center border border-yellow-500 text-xl px-6 py-4 text-gray-300 dark:text-gray-100  dark:hover:bg-gray-800 hover:text-white hover:bg-gray-900'>
+										className='w-full flex items-center justify-center rounded border border-yellow-500 text-xl px-6 py-4 text-gray-300 dark:text-gray-100  dark:hover:bg-gray-500 hover:text-white hover:bg-gray-900'>
 										Create Task
 									</button>
 								</div>
