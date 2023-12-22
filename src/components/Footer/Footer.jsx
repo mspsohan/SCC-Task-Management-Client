@@ -8,8 +8,8 @@ const Footer = () => {
 	};
 	return (
 		<>
-			<div className='flex flex-col mt-12 lg:justify-end font-poppins'>
-				<div className='w-full bg-blue-900 pt-11  '>
+			<div className='flex flex-col mt-12 lg:justify-end font-poppins overflow-hidden'>
+				<div className='w-full bg-blue-900 pt-11  p-2'>
 					<div className='justify-center flex-1 max-w-7xl py-4 mx-auto lg:py-0'>
 						<div className='flex flex-wrap items-center justify-between pb-4 border-b border-gray-500  lg:justify-between'>
 							<h2 className='mb-4 text-2xl font-semibold tracking-wider text-gray-300 lg:mb-0 '>

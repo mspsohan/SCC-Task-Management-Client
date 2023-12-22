@@ -76,7 +76,7 @@ const Tasks = ({ task, index, draggableId, refetch }) => {
 							<div className='flex flex-col gap-4 w-11/12 items-start'>
 								<div className='flex flex-row justify-between ml-1 w-full items-start'>
 									<div className='text-sm font-semibold tracking-[-0.28] text-white mt-1'>
-										T-{index + 1} {task?._id}
+										T-{index + 1}
 									</div>
 									<div
 										id='Component'

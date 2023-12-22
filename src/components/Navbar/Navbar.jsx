@@ -1,22 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import useAuth from "../../hooks/useAuth";
-// import toast from "react-hot-toast";
+import useAuth from '../../hooks/useAuth';
 import logo from '../../assets/Screenshot_2-removebg-preview.png';
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
-	// const { user, logOut } = useAuth()
-	// const navigate = useNavigate()
-	// const handleLogout = async () => {
-	//    try {
-	//       await logOut()
-	//       toast.success("Logout Successfully")
-	//       navigate('/')
-	//    } catch (error) {
-	//       toast.error(error)
-	//    }
-	// }
+	const { user } = useAuth();
 
 	const navlinks = (
 		<>
@@ -64,6 +53,19 @@ const Navbar = () => {
 				}>
 				Contact Us
 			</NavLink>
+			{user?.email && (
+				<NavLink
+					to='/dashboard'
+					className={({ isActive, isPending }) =>
+						isPending
+							? 'pending'
+							: isActive
+							? 'active hover:border-b-2 border-b-blue-600  text-black text-lg md:text-xl mx-3  rounded-none font-semibold border-b-2'
+							: 'hover:border-b-2 border-b-blue-600  text-black  text-lg md:text-xl mx-3 rounded-none '
+					}>
+					Dashboard
+				</NavLink>
+			)}
 		</>
 	);
 	return (
@@ -71,7 +73,11 @@ const Navbar = () => {
 			<div className='shadow-lg font-poppins '>
 				<div className='max-w-7xl px-4 mx-auto'>
 					<nav className='flex items-center justify-between py-4'>
-						<img src={logo} alt='' className='text-2xl font-bold text-gray-700 w-[10%]' />
+						<img
+							src={logo}
+							alt=''
+							className='text-2xl font-bold text-gray-700 w-[30%] lg:w-[10%]'
+						/>
 						<div className='flex justify-between lg:space-x-9'>
 							<div className='lg:hidden'>
 								<button
@@ -106,7 +112,11 @@ const Navbar = () => {
 						<div
 							className={`absolute inset-0 z-50 h-screen p-3 text-gray-400 duration-500 transform bg-blue-50  w-80  $  {!open ? "lg:hidden" : ""} lg:transform-none lg:relative`}>
 							<div className='flex justify-between lg:'>
-								<img src={logo} alt='' className='p-2 text-2xl font-bold text-gray-700 ' />
+								<img
+									src={logo}
+									alt=''
+									className='p-2 text-2xl font-bold text-gray-700 w-[45%]'
+								/>
 
 								<button
 									onClick={() => setOpen(false)}
@@ -123,6 +133,7 @@ const Navbar = () => {
 									</svg>
 								</button>
 							</div>
+							<hr className='text-black border-b-2 border-black' />
 							<ul className='px-4 text-left mt-7 flex flex-col'>{navlinks}</ul>
 						</div>
 					)}
