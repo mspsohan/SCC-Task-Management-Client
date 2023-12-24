@@ -64,6 +64,19 @@ const Tasks = ({ task, index, draggableId, refetch }) => {
 		setIsOpen(true);
 	}
 
+	const deadlineDate = new Date(task.deadline);
+	const formattedDeadline = deadlineDate.toLocaleString('en-US', {
+		day: '2-digit',
+		month: '2-digit',
+		year: '2-digit',
+		hour: 'numeric',
+		minute: '2-digit',
+		hour12: true,
+		timeZone: 'Asia/Dhaka',
+	});
+
+	const [date, time] = formattedDeadline.split(', ');
+
 	return (
 		<>
 			<Draggable draggableId={draggableId} index={index}>
@@ -72,11 +85,12 @@ const Tasks = ({ task, index, draggableId, refetch }) => {
 						ref={provided.innerRef}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}>
-						<div className="bg-gray-600 flex flex-col justify-center pl-5 gap-6 w-full h-40 font-['Gelion'] items-start rounded-lg">
+						<div className="bg-gray-600 flex flex-col justify-center pl-3 w-full h-40 font-['Gelion'] items-start rounded-lg">
 							<div className='flex flex-col gap-4 w-11/12 items-start'>
 								<div className='flex flex-row justify-between ml-1 w-full items-start'>
-									<div className='text-sm font-semibold tracking-[-0.28] text-white mt-1'>
-										T-{index + 1}
+									<div className='text-sm font-semibold tracking-[-0.28] text-yellow-300 mt-1'>
+										Due Date: {date.split('/')[1]}/{date.split('/')[0]}/
+										{date.split('/')[2]} {time}
 									</div>
 									<div
 										id='Component'
@@ -95,7 +109,7 @@ const Tasks = ({ task, index, draggableId, refetch }) => {
 							<div className='flex justify-between w-full'>
 								<button
 									onClick={() => openViewModal(task)}
-									className='flex flex-row ml-px gap-3 w-24 items-start'>
+									className='flex flex-row ml-px gap-3 mt-3 border p-px rounded-md w-24 items-center bg-purple-500'>
 									<div className='text-center text-sm font-semibold tracking-[-0.28] text-white'>
 										View Task
 									</div>
@@ -129,9 +143,16 @@ const TasksList = ({ title, tasks, refetch }) => {
 		<Droppable droppableId={title} direction='vertical'>
 			{(provided) => (
 				<div ref={provided.innerRef} {...provided.droppableProps} className='task-list'>
-					<div className='w-full p-2'>
-						<h2 className='text-white text-3xl pb-5'>{title}</h2>
-						<div className='p-3 bg-gray-600 border-b-4 border-blue-400 min-h-40 space-y-3 dark:bg-gray-900 rounded-b-xl '>
+					<div className='w-full '>
+						<h2
+							className={`
+						${title === 'Todo' && ' bg-red-500'}
+						${title === 'Ongoing' && 'bg-yellow-500 '}
+						${title === 'Complete' && 'bg-green-500 '}
+						text-white text-center text-3xl my-5 py-2 font-semibold rounded`}>
+							{title}
+						</h2>
+						<div className='p-3  border-b-4 border-blue-400 min-h-40 space-y-3 bg-gray-900 rounded-b-xl '>
 							{tasks?.map((task, index) => (
 								<Tasks
 									key={task._id}
@@ -151,7 +172,7 @@ const TasksList = ({ title, tasks, refetch }) => {
 	);
 };
 
-const TaskDashboard = () => {
+const TaskDashboard = ({ openModal }) => {
 	const { data: tasks, refetch, isLoading } = useUserTask();
 
 	const handleDragEnd = async (result) => {
@@ -191,12 +212,20 @@ const TaskDashboard = () => {
 
 	return (
 		<>
+			<div className={`my-4 container mx-auto`}>
+				<button
+					type='button'
+					onClick={openModal}
+					className='w-full md:w-60  flex items-center justify-center rounded border border-yellow-500 text-xl py-2 text-gray-900 dark:text-gray-100  dark:hover:bg-gray-500 hover:text-white hover:bg-gray-900'>
+					Create Task
+				</button>
+			</div>
 			{tasks?.length === 0 ? (
 				<EmptyTask refetch={refetch} />
 			) : (
 				<>
 					<DragDropContext onDragEnd={handleDragEnd}>
-						<div className='dashboard text-white grid grid-cols-1 md:grid-cols-3'>
+						<div className='dashboard text-white grid grid-cols-1 md:grid-cols-3 gap-5'>
 							<TasksList
 								title='Todo'
 								tasks={tasks?.filter((task) => task?.status === 'Todo')}

@@ -5,5 +5,11 @@
 ## Dashboard
 
 <div>
-<img src="./src/assets/localhost_5173_dashboard.png"/>
+<img src="./src/assets/taskboard.jpg"/>
+</div>
+
+## View Task Detail
+
+<div>
+<img src="./src/assets/viewDetails.jpg"/>
 </div>

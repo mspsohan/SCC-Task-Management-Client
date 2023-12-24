@@ -25,7 +25,12 @@ const DashboardLayout = () => {
 
 	function openModal() {
 		setIsOpen(true);
+		setSidebar(false);
 	}
+
+	const openCreateModal = () => {
+		setIsOpen(true);
+	};
 
 	const handleLogout = async () => {
 		try {
@@ -45,14 +50,14 @@ const DashboardLayout = () => {
 					<div className='relative lg:block navbar-menu'>
 						<nav
 							className={`fixed ${
-								!sidebar ? 'hidden lg:fixed' : ''
+								!sidebar ? 'hidden lg:fixed' : 'lg:fixed'
 							} top-0 transition-all lg:mt-0 mt-16 left-0 bottom-0 flex flex-col dark:bg-gray-900 w-[280px] bg-gray-800 overflow-hidden z-50`}
 							id='sidenav'>
 							<div className='flex items-center justify-center w-full border-b border-gray-600 bg-white'>
 								<img src={logo} alt='' className='w-[50%]' />
 							</div>
 							<div className='pb-6 mt-4 overflow-x-hidden overflow-y-auto'>
-								<div className=''>
+								<div className='hidden'>
 									<button
 										type='button'
 										onClick={openModal}
@@ -203,7 +208,7 @@ const DashboardLayout = () => {
 									<div className='items-center mr-auto lg:flex'>
 										<button
 											onClick={() => setSidebar(!sidebar)}
-											className='px-2 py-2 text-blue-500 bg-blue-100 rounded dark:bg-gray-800 dark:text-gray-400'>
+											className={` px-2 py-2 text-blue-500 bg-blue-100 rounded dark:bg-gray-800 dark:text-gray-400`}>
 											<IoMdMenu className='text-[22px]' />
 										</button>
 									</div>
@@ -306,7 +311,12 @@ const DashboardLayout = () => {
 							</nav>
 						</div>
 						{/* Outlet */}
-						<Outlet openModal={openModal} />
+						<div
+							onClick={() => {
+								setProfileOpen(false);
+							}}>
+							<Outlet context={openCreateModal} />
+						</div>
 					</div>
 				</div>
 			</div>

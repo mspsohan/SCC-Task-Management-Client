@@ -2,8 +2,8 @@ const AccountSetting = () => {
 	return (
 		<>
 			<div className='flex flex-col items-center justify-center h-[calc(100vh-10vh)] px-4'>
-				<h1 className='text-4xl font-bold text-gray-100 mb-4'>Coming Soon</h1>
-				<p className='text-gray-200 text-lg mb-8'>
+				<h1 className='text-4xl font-bold dark:text-gray-100 text-black mb-4'>Coming Soon</h1>
+				<p className='dark:text-gray-200 text-gray-600 text-lg mb-8'>
 					We`re working hard to bring you an amazing new Features. Stay tuned!
 				</p>
 				<div className='flex space-x-4'></div>

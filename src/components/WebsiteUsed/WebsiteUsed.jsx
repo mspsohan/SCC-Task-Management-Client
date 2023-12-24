@@ -25,13 +25,26 @@ export default function WebsiteUsed() {
 				</p>
 			</div>
 			<Swiper
-				slidesPerView={3}
-				spaceBetween={30}
+				loop={true}
 				autoplay={{
 					delay: 2500,
 					disableOnInteraction: false,
 				}}
 				freeMode={true}
+				breakpoints={{
+					640: {
+						slidesPerView: 1,
+						spaceBetween: 20,
+					},
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 30,
+					},
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 30,
+					},
+				}}
 				pagination={{
 					clickable: true,
 				}}
